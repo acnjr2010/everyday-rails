@@ -50,4 +50,18 @@ RSpec.describe AcademiesController, type: :controller do
       end
     end
   end
+
+  describe "GET #new" do
+    it "assigns a new Academy to @academy" do
+      get :new
+
+      expect(assigns(:academy)).to be_a_new(Academy)
+    end
+
+    it "renders the :new template" do
+      get :new
+
+      expect(response).to render_template :new
+    end
+  end
 end
