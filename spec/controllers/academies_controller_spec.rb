@@ -64,4 +64,20 @@ RSpec.describe AcademiesController, type: :controller do
       expect(response).to render_template :new
     end
   end
+
+  describe "GET #edit" do
+    it "assigns the request academy to @academy" do
+      academy = create(:academy)
+      get :edit, params: { id: academy.id }
+
+      expect(assigns(:academy)).to eq academy
+    end
+
+    it "renders the :edit template" do
+      academy = create(:academy)
+      get :edit, params: { id: academy.id }
+
+      expect(response).to render_template :edit
+    end
+  end
 end
