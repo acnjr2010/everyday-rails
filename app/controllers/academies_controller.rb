@@ -30,6 +30,20 @@ class AcademiesController < ApplicationController
     end
   end
 
+  def update
+    @academy = Academy.find(params[:id])
+
+    respond_to do |format|
+      if @academy.update(academy_params)
+        format.html { redirect_to @academy, notice: "Academy created" }
+        format.json { render :show, status: :created, location: @academy }
+      else
+        format.html { render :edit }
+        format.json { render json: @academy.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
     def academy_params
