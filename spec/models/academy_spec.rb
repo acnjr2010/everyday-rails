@@ -5,35 +5,35 @@ RSpec.describe Academy, type: :model do
 
     context "validations invalid fields" do
       it "is invalid without a academy_name" do
-        academy = Academy.new(academy_name: nil)
+        academy = build(:academy, academy_name: nil)
         academy.valid?
 
         expect(academy.errors[:academy_name]).to include("can't be blank")
       end
 
       it "is invalid without a director_name" do
-        academy = Academy.new(director_name: nil)
+        academy = build(:academy, director_name: nil)
         academy.valid?
 
         expect(academy.errors[:director_name]).to include("can't be blank")
       end
 
       it "is invalid without a address" do
-        academy = Academy.new(address: nil)
+        academy = build(:academy, address: nil)
         academy.valid?
 
         expect(academy.errors[:address]).to include("can't be blank")
       end
 
       it "is invalid without a phone" do
-        academy = Academy.new(phone: nil)
+        academy = build(:academy, phone: nil)
         academy.valid?
 
         expect(academy.errors[:phone]).to include("can't be blank")
       end
 
       it "is invalid without a email" do
-        academy = Academy.new(email: nil)
+        academy = build(:academy, email: nil)
         academy.valid?
 
         expect(academy.errors[:email]).to include("can't be blank")
@@ -41,70 +41,41 @@ RSpec.describe Academy, type: :model do
     end
   end
 
-  describe "" do
+  describe "Invalids" do
     before :each do
-      @academy = Academy.create(
-        academy_name: 'Fatec Praia Grande',
-        director_name: 'Nelson',
-        address: 'Praça 19 de maio, Praia Grande/SP',
-        phone: '3425-9652',
-        email: 'fatecpg@fatec.com.br'
-      )
+      @academy = create(:academy)
     end
 
-    context "when " do
+    context "when duplicate datas " do
       it "is invalid with a duplicate academy_name" do
-        other_academy = Academy.new(
-          academy_name: 'Fatec Praia Grande',
-          director_name: 'Nelson',
-          address: 'Praça 19 de maio, Praia Grande/SP',
-          phone: '3425-9652',
-          email: 'fatecpg@fatec.com.br'
-        )
+        other_academy = build(:academy, academy_name: @academy.academy_name)
         other_academy.valid?
 
         expect(other_academy.errors[:academy_name]).to include("has already been taken")
       end
 
       it "is invalid with a duplicate email" do
-        other_academy = Academy.create(
-          academy_name: 'Fatec Praia Grande',
-          director_name: 'Nelson',
-          address: 'Praça 19 de maio, Praia Grande/SP',
-          phone: '3425-9652',
-          email: 'fatecpg@fatec.com.br'
-        )
-
+        other_academy = build(:academy, email: @academy.email)
         other_academy.valid?
 
         expect(other_academy.errors[:email]).to include("has already been taken")
       end
 
       it "return a academy_name and director_name as a string" do
-        expect(@academy.name).to eq 'Fatec Praia Grande Nelson'
+        expect(@academy.name).to eq "#{@academy.academy_name} #{@academy.director_name}"
       end
 
       it "return a academy infos" do
-        expect(@academy.infos).to eq 'Praça 19 de maio, Praia Grande/SP, 3425-9652, fatecpg@fatec.com.br'
+        expect(@academy.infos).to eq "#{@academy.address}, #{@academy.phone}, #{@academy.email}"
       end
 
       it "returns a sorted array of results that match" do
-        other_academy = Academy.create(
-          academy_name: 'Uninove',
-          director_name: 'Mercos',
-          address: 'Rua Conselheiro Nébias, 200, Santos/SP',
-          phone: '3425-9651',
-          email: 'uninove@example2.com.br'
-        )
-        another_academy = Academy.create(
-          academy_name: 'Fafesp',
-          director_name: 'Maria',
-          address: 'Rua dos Bombeiros, São Vicente/SP',
-          phone: '3425-9650',
-          email: 'fatecpg@fatec0.com.br'
-        )
+        other_academy = build(:academy)
+        another_academy = build(:academy)
+        other_academy.valid?
+        another_academy.valid?
 
-        expect(Academy.by_letter("F")).to eq [another_academy, @academy]
+        expect(Academy.by_letter("F")).not_to include @academy
       end
     end
 
