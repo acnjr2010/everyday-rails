@@ -4,6 +4,5 @@ FactoryGirl.define do
     name { Faker::Name.name }
     document { Faker::Number.number(11)}
     email { Faker::Internet.safe_email }
-    academy :academy
   end
 end

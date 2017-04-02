@@ -70,10 +70,20 @@ RSpec.describe Academy, type: :model do
       end
 
       it "returns a sorted array of results that match" do
-        other_academy = build(:academy)
-        another_academy = build(:academy)
-        other_academy.valid?
-        another_academy.valid?
+        other_academy = Academy.create(
+          academy_name: 'Uninove',
+          director_name: 'Mercos',
+          address: 'Rua Conselheiro Nébias, 200, Santos/SP',
+          phone: '3425-9651',
+          email: 'uninove@example2.com.br'
+        )
+        another_academy = Academy.create(
+          academy_name: 'Fafesp',
+          director_name: 'Maria',
+          address: 'Rua dos Bombeiros, São Vicente/SP',
+          phone: '3425-9650',
+          email: 'fatecpg@fatec0.com.br'
+        )
 
         expect(Academy.by_letter("F")).not_to include @academy
       end
