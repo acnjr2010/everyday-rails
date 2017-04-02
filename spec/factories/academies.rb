@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :academy do
-    academy_name "MyString"
-    director_name "MyString"
-    address "MyString"
-    phone "MyString"
-    email "MyString"
+    academy_name { Faker::Name.title }
+    director_name { Faker::Name.name }
+    address { Faker::Address.street_address }
+    phone { Faker::PhoneNumber.subscriber_number(8) }
+    email { Faker::Internet.safe_email }
   end
 end

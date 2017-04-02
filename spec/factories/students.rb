@@ -1,7 +1,9 @@
 FactoryGirl.define do
   factory :student do
-    name "MyString"
-    document "MyString"
-    email "MyString"
+    association :academy
+    name { Faker::Name.name }
+    document { Faker::Number.number(11)}
+    email { Faker::Internet.safe_email }
+    academy :academy
   end
 end
