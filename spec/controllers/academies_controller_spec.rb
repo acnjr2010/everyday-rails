@@ -181,5 +181,5 @@ RSpec.describe AcademiesController, type: :controller do
 
       expect(response).to redirect_to academies_url
     end
-  end  
+  end
 end
