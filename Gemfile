@@ -20,6 +20,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'rspec-core', '~> 3.5', '>= 3.5.4'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.1'
   gem 'factory_girl_rails', '~> 4.8'
 end
 

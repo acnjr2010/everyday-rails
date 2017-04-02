@@ -5,5 +5,9 @@ FactoryGirl.define do
     address { Faker::Address.street_address }
     phone { Faker::PhoneNumber.subscriber_number(8) }
     email { Faker::Internet.safe_email }
+
+    factory :invalid_academy do
+      academy_name nil
+    end
   end
 end
