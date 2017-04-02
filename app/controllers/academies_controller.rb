@@ -44,6 +44,16 @@ class AcademiesController < ApplicationController
     end
   end
 
+  def destroy
+    @academy = Academy.find(params[:id])
+
+    @academy.destroy
+    respond_to do |format|
+      format.html { redirect_to academies_url, notice: "Academy deleted" }
+      format.json { render json: @resource }
+    end
+  end
+
   private
 
     def academy_params

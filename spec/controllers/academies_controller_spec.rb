@@ -162,4 +162,24 @@ RSpec.describe AcademiesController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    before :each do
+      @academy = create(:academy)
+    end
+
+    it "deltes the academy" do
+      expect{
+        delete :destroy,
+        params: { id: @academy}
+      }.to change(Academy, :count).by(-1)
+    end
+
+    it "redirects do academy#index" do
+      delete :destroy,
+      params: { id: @academy }
+
+      expect(response).to redirect_to academies_url
+    end
+  end  
 end
