@@ -80,4 +80,35 @@ RSpec.describe AcademiesController, type: :controller do
       expect(response).to render_template :edit
     end
   end
+
+  describe "POST create" do
+    context "with valid attributes" do
+      it "saves the new academy in database" do
+        expect{
+          post :create, params: { academy: attributes_for(:academy) }
+        }.to change(Academy, :count).by(1)
+      end
+
+      it "redirects to academy#show" do
+        post :create, params: { academy: attributes_for(:academy) }
+
+        expect(response).to redirect_to academy_path(assigns[:academy])
+      end
+    end
+
+    context "with in a invalid attributes" do
+      it "does not save the new academy in the database" do
+        expect{
+          post :create, params: { academy: attributes_for(:invalid_academy) }
+        }.not_to change(Academy, :count)
+      end
+
+      it "re-renders the :new template" do
+        post :create,
+        params: { academy: attributes_for(:invalid_academy) }
+
+        expect(response).to render_template :new
+      end
+    end
+  end
 end

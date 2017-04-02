@@ -8,6 +8,10 @@ FactoryGirl.define do
 
     factory :invalid_academy do
       academy_name nil
+      director_name nil
+      address nil
+      phone nil
+      email nil
     end
   end
 end
