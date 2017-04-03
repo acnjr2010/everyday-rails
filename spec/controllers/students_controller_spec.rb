@@ -26,5 +26,55 @@ RSpec.describe StudentsController, type: :controller do
         expect(response).to render_template :index
       end
     end
+
+    context "without params[:letter]" do
+      xit "populates an array of all students" do
+        academy = create(:academy)
+        student = create(:student, academy: academy)
+        other_student = create(:student, academy: academy)
+        get :index, params: { academy_id: academy}
+
+        expect(:students).to match_array([student, other_student])
+      end
+
+      it "render the :index template" do
+        academy = create(:academy)
+        get :index, params: { academy_id: academy }
+
+        expect(response).to render_template :index
+      end
+    end
   end
+
+  describe "GET #new" do
+    it "assigns a new Student to @student" do
+      academy = create(:academy)
+      get :new, params: { academy_id: academy }
+
+      expect(assigns(:student)).to be_a_new(Student)
+    end
+
+    it "renders the :new template" do
+      academy = create(:academy)
+      get :new, params: { academy_id: academy }
+
+      expect(response).to render_template :new
+    end
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end
