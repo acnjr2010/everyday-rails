@@ -2,26 +2,31 @@ require 'rails_helper'
 
 RSpec.describe StudentsController, type: :controller do
   describe "GET #show" do
+    before :each do
+      @student = create(:student)
+    end
+    
     it "assings the requested student to @student" do
-      student = create(:student)
-      get :show, params: { id: student, academy_id: student.academy_id }
+      get :show, params: { id: @student, academy_id: @student.academy_id }
 
-      expect(assigns(:student)).to eq student
+      expect(assigns(:student)).to eq @student
     end
 
     it "renders the :show template" do
-      student = create(:student)
-      get :show, params: { id: student, academy_id: student.academy_id }
+      get :show, params: { id: @student, academy_id: @student.academy_id }
 
       expect(response).to render_template :show
     end
   end
 
   describe "GET #index" do
+    before :each do
+      @academy = create(:academy)
+    end
+
     context "with params[:letter]" do
       it "renders the :index template" do
-        academy = create(:academy)
-        get :index, params: { academy_id: academy }
+        get :index, params: { academy_id: @academy }
 
         expect(response).to render_template :index
       end
@@ -29,17 +34,15 @@ RSpec.describe StudentsController, type: :controller do
 
     context "without params[:letter]" do
       it "populates an array of all students" do
-        academy = create(:academy)
-        student = create(:student, academy_id: academy.id)
-        other_student = create(:student, academy_id: academy.id)
-        get :index, params: { academy_id: academy.id }
-        
+        student = create(:student, academy_id: @academy.id)
+        other_student = create(:student, academy_id: @academy.id)
+        get :index, params: { academy_id: @academy.id }
+
         expect(assigns(:students)).to match_array([student, other_student])
       end
 
       it "render the :index template" do
-        academy = create(:academy)
-        get :index, params: { academy_id: academy }
+        get :index, params: { academy_id: @academy }
 
         expect(response).to render_template :index
       end
@@ -47,33 +50,31 @@ RSpec.describe StudentsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new Student to @student" do
-      academy = create(:academy)
-      get :new, params: { academy_id: academy }
+    before :each do
+      @academy = create(:academy)
+      get :new, params: { academy_id: @academy }
+    end
 
+    it "assigns a new Student to @student" do
       expect(assigns(:student)).to be_a_new(Student)
     end
 
     it "renders the :new template" do
-      academy = create(:academy)
-      get :new, params: { academy_id: academy }
-
       expect(response).to render_template :new
     end
   end
 
   describe "GET #edit" do
-    it "assigns the request student to @student" do
-      student = create(:student)
-      get :edit, params: { id: student.id, academy_id: student.academy_id }
+    before :each do
+      @student = create(:student)
+      get :edit, params: { id: @student.id, academy_id: @student.academy_id }
+    end
 
-      expect(assigns(:student)).to eq student
+    it "assigns the request student to @student" do
+      expect(assigns(:student)).to eq @student
     end
 
     it "renders the :edit template" do
-      student = create(:student)
-      get :edit, params: { id: student.id, academy_id: student.academy_id }
-
       expect(response).to render_template :edit
     end
   end
