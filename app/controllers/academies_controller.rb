@@ -22,7 +22,7 @@ class AcademiesController < ApplicationController
     respond_to do |format|
       if @academy.save
         format.html { redirect_to @academy, notice: "Academy created" }
-        format.json { render :show, status: :created, location: @academy }
+        format.json { render :json, status: :created, location: @academy }
       else
         format.html { render :new }
         format.json { render json: @academy.errors, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class AcademiesController < ApplicationController
 
     respond_to do |format|
       if @academy.update(academy_params)
-        format.html { redirect_to @academy, notice: "Academy created" }
+        format.html { redirect_to @academy, notice: "Academy updated" }
         format.json { render :show, status: :created, location: @academy }
       else
         format.html { render :edit }

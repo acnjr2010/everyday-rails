@@ -160,7 +160,7 @@ RSpec.describe AcademiesController, type: :controller do
       @academy = create(:academy)
     end
 
-    it "deltes the academy" do
+    it "deletes the academy" do
       expect{
         delete :destroy,
         params: { id: @academy}
