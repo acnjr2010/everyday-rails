@@ -28,13 +28,13 @@ RSpec.describe StudentsController, type: :controller do
     end
 
     context "without params[:letter]" do
-      xit "populates an array of all students" do
+      it "populates an array of all students" do
         academy = create(:academy)
         student = create(:student, academy_id: academy.id)
         other_student = create(:student, academy_id: academy.id)
         get :index, params: { academy_id: academy.id }
-
-        expect(:students).to match_array([student, other_student])
+        
+        expect(assigns(:students)).to match_array([student, other_student])
       end
 
       it "render the :index template" do
