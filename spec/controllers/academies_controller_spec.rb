@@ -2,17 +2,16 @@ require 'rails_helper'
 
 RSpec.describe AcademiesController, type: :controller do
   describe "GET #show" do
-    it "assings the requested academy to @academy" do
-      academy = create(:academy)
-      get :show, params: { id: academy.id }
+    before :each do
+      @academy = create(:academy)
+      get :show, params: { id: @academy.id }
+    end
 
-      expect(assigns(:academy)).to eq academy
+    it "assings the requested academy to @academy" do
+      expect(assigns(:academy)).to eq @academy
     end
 
     it "renders the :show template" do
-      academy = create(:academy)
-      get :show, params: { id: academy.id }
-
       expect(response).to render_template :show
     end
   end
@@ -44,31 +43,30 @@ RSpec.describe AcademiesController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new Academy to @academy" do
+    before :each do
       get :new
+    end
 
+    it "assigns a new Academy to @academy" do
       expect(assigns(:academy)).to be_a_new(Academy)
     end
 
     it "renders the :new template" do
-      get :new
-
       expect(response).to render_template :new
     end
   end
 
   describe "GET #edit" do
-    it "assigns the request academy to @academy" do
-      academy = create(:academy)
-      get :edit, params: { id: academy.id }
+    before :each do
+      @academy = create(:academy)
+      get :edit, params: { id: @academy.id }
+    end
 
-      expect(assigns(:academy)).to eq academy
+    it "assigns the request academy to @academy" do
+      expect(assigns(:academy)).to eq @academy
     end
 
     it "renders the :edit template" do
-      academy = create(:academy)
-      get :edit, params: { id: academy.id }
-
       expect(response).to render_template :edit
     end
   end
