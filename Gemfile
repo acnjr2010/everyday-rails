@@ -17,6 +17,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2', '>= 4.2.1'
 gem 'cancancan', '~> 1.16'
+gem 'rolify', '~> 5.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri

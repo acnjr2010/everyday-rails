@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'support/controller_macros'
 
 RSpec.describe AcademiesController, type: :controller do
   describe "administrator access" do
