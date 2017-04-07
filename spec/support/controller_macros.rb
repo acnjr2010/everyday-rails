@@ -13,4 +13,12 @@ module ControllerMacros
       sign_in user
     end
   end
+
+  def login_user_editor
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      @user = FactoryGirl.create(:user_editor)
+      sign_in @user
+    end
+  end
 end
