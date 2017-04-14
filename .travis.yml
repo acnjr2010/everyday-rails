@@ -8,5 +8,6 @@ script:
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
 before_script:
-  - sqlite3 db/test.db
+  - bundle exec rake db:create
+  #- sqlite3 db/test.db
 bundler_args: --binstubs=./bundler_stubs
