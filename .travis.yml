@@ -7,10 +7,10 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
+  addons:
+    code_climate:
+      repo_token: cef388731cf53fa06fea2bd018cc82cf274b181e03ff30b7b0f672e6c964ad7e
 before_script:
   - bundle exec rake db:create
 bundler_args: --binstubs=./bundler_stubs
 # Code Climate Note
-addons:
-  code_climate:
-    repo_token: cef388731cf53fa06fea2bd018cc82cf274b181e03ff30b7b0f672e6c964ad7e
