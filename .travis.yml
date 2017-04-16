@@ -9,5 +9,8 @@ script:
   - bundle exec rspec spec/
 before_script:
   - bundle exec rake db:create
-  #- sqlite3 db/test.db
 bundler_args: --binstubs=./bundler_stubs
+# Code Climate Note
+addons:
+  code_climate:
+    repo_token: cef388731cf53fa06fea2bd018cc82cf274b181e03ff30b7b0f672e6c964ad7e
